@@ -25,25 +25,15 @@ class MarvelService {
     return this._transformCharacter(res.data.results[0]);
   };
 
-  _ifEmptyProp = (prop) => {
-    if (!prop) {
-      return "not found :(";
-    } else if (Array.isArray(prop) && prop[0] === "") {
-      return "not found :(";
-    } else {
-      return prop;
-    }
-  };
-
   _transformCharacter = (char) => {
     return {
-      name: this._ifEmptyProp(char.name),
-      description: this._ifEmptyProp(char.description),
-      thumbnail: this._ifEmptyProp(
-        char.thumbnail.path + "." + char.thumbnail.extension
-      ),
-      homepage: this._ifEmptyProp(char.urls[0].url),
-      wiki: this._ifEmptyProp(char.urls[1].url),
+      name: char.name,
+      description: char.description
+        ? `${char.description.slice(0, 210)}...`
+        : "There is no description for this character",
+      thumbnail: char.thumbnail.path + "." + char.thumbnail.extension,
+      homepage: char.urls[0].url,
+      wiki: char.urls[1].url,
     };
   };
 }
