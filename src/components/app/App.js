@@ -1,4 +1,4 @@
-import { Component } from "react/cjs/react.development";
+import { Component } from "react";
 
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
