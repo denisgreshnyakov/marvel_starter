@@ -1,5 +1,4 @@
 import "./comicsList.scss";
-import ErrorMessage from "../errorMessage/ErrorMessage";
 import uw from "../../resources/img/UW.png";
 import xMen from "../../resources/img/x-men.png";
 
