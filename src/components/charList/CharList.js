@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 
@@ -29,8 +29,7 @@ const CharList = (props) => {
   const [offset, setOffset] = useState(210);
   const [charEnded, setCharEnded] = useState(false);
 
-  const { loading, error, getAllCharacters, process, setProcess } =
-    useMarvelService();
+  const { getAllCharacters, process, setProcess } = useMarvelService();
 
   const duration = 200;
 
@@ -114,9 +113,13 @@ const CharList = (props) => {
     return <ul className="char__grid">{items}</ul>;
   }
 
+  const elements = useMemo(() => {
+    return setContent(process, () => renderItems(charList), newItemLoading);
+  }, [process]);
+
   return (
     <div className="char__list">
-      {setContent(process, () => renderItems(charList), newItemLoading)}
+      {elements}
       <button
         className="button button__main button__long"
         disabled={newItemLoading}
